@@ -1,0 +1,13 @@
+name: Hello World GitHub Actions
+run-name: ${{ github.actor }} ran the workflow
+on: 
+  push:
+    branches:
+      - 'main'
+jobs:
+  print-info-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello World GitHub Actions"
+      - run: echo "Event - ${{ github.event_name }}"
+      - run: echo "Status - ${{ job.status }}."
