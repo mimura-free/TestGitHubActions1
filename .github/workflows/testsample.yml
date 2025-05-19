@@ -24,3 +24,5 @@ jobs:
 
       - name: Run sample.py
         run: python sample.py
+	env:
+        PYTHONIOENCODING: utf-8
