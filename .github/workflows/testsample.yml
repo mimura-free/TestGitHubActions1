@@ -2,8 +2,6 @@ name: Test sample.py
 
 on:
   push:
-    paths:
-      - sample.py
 
 jobs:
   run-sample:
