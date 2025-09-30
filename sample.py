@@ -2,7 +2,7 @@ def calculate_sum(a, b):
     return a + b
 
 def calculate_product(a, b):
-    return a * b +100000
+    return a * b
 
 def return_message():
     return "これはテストメッセージです。"
