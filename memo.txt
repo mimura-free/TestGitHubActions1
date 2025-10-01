@@ -1,0 +1,27 @@
+① 最小MSEについては、学習後に生成される Summary タブの「Training Result」に表示されている。
+② もしMSEの推移が必要な場合、regressionLearnerを使用せずに、下記のようにコードで対応。
+% データの生成
+rng('default');
+X = rand(100,3);
+y = X(:,1) - 2*X(:,2) + randn(100,1)*0.1;
+
+% ハイパーパラメータ最適化付き回帰モデルの学習
+t = templateTree('Reproducible',true);
+Mdl = fitrensemble(X, y, ...
+    'Method', 'LSBoost', ...
+    'Learners', t, ...
+    'OptimizeHyperparameters', {'NumLearningCycles','LearnRate'}, ...
+    'HyperparameterOptimizationOptions', struct('ShowPlots',true,'Verbose',1));
+
+% 最小MSEの表示
+results = Mdl.HyperparameterOptimizationResults;
+[minMSE, idx] = min(results.ObjectiveMinimumTrace);
+fprintf('最小MSE: %.4f\n', minMSE);
+
+% MSEの履歴をプロット（ShowPlotsで自動的に表示されますが、手動で描画も可能）
+figure;
+plot(results.ObjectiveMinimumTrace, '-o');
+xlabel('試行回数');
+ylabel('MSE');
+title('最小MSEの推移');
+grid on;
